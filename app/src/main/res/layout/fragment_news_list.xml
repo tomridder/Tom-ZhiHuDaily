@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/ll_mainlayout"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:background="@color/cardview_shadow_start_color"
+        app:contentInsetStart="10dp"
+        app:theme="@style/MyToolbar"
+        android:id="@+id/toolbars"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+<com.youth.banner.Banner
+    android:id="@+id/banner"
+    android:layout_width="match_parent"
+    android:layout_height="250dp">
+</com.youth.banner.Banner>
+<android.support.v7.widget.RecyclerView
+android:id="@+id/main_recyclerView"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:scrollbars="vertical"
+    >
+</android.support.v7.widget.RecyclerView>
+
+
+</LinearLayout>
