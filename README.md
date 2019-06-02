@@ -18,7 +18,7 @@ Tom ZhiHuDaily可实现功能：
 - 知乎Stories 的收藏
 
 
-![Image](https://github.com/tomridder/Tom-ZhiHuDaily/blob/master/4.png)
+![Image](https://github.com/tomridder/Tom-ZhiHuDaily/blob/master/5.png)
 
 #### 本文的主要内容
 
