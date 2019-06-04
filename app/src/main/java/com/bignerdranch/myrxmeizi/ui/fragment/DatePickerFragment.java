@@ -41,6 +41,9 @@ public class DatePickerFragment extends DialogFragment
     {
 
 
+        
+
+
         Date date=(Date)getArguments().getSerializable(ARG_DATE);
         Calendar calendar=Calendar.getInstance();
         calendar.setTime(date);
