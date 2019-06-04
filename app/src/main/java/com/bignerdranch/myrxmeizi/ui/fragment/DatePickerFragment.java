@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
@@ -39,11 +40,7 @@ public class DatePickerFragment extends DialogFragment
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState)
     {
-
-
-        
-
-
+        Log.i("TAG","我说一个粉刷匠");
         Date date=(Date)getArguments().getSerializable(ARG_DATE);
         Calendar calendar=Calendar.getInstance();
         calendar.setTime(date);
