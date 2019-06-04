@@ -65,6 +65,14 @@ public class NewsFavoriteFragment extends Fragment
         searchView.setQueryHint(
                 getActivity().getString(R.string.search_hint)
         );
+
+        int id = searchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+        TextView textView1 = (TextView) searchView.findViewById(id);
+        textView.setTextColor(getResources().getColor(R.color.background_Day));
+
+
+
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s)
@@ -88,22 +96,22 @@ public class NewsFavoriteFragment extends Fragment
             public boolean onQueryTextChange(String s)
             {
 
-                EditText textView = (EditText) searchView
-                        .findViewById(
-                                android.support.v7.appcompat.R.id.search_src_text
-                        );
-
-                textView.setHintTextColor(
-                        ContextCompat.getColor(
-                                getActivity(),
-                                R.color.background_Day)
-                );
-                searchView.setQueryHint(
-                        getActivity().getString(R.string.search_hint)
-                );
-                int id = searchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
-                TextView textView1 = (TextView) searchView.findViewById(id);
-                textView1.setTextColor(getResources().getColor(R.color.background_Day));
+//                EditText textView = (EditText) searchView
+//                        .findViewById(
+//                                android.support.v7.appcompat.R.id.search_src_text
+//                        );
+//
+//                textView.setHintTextColor(
+//                        ContextCompat.getColor(
+//                                getActivity(),
+//                                R.color.background_Day)
+//                );
+//                searchView.setQueryHint(
+//                        getActivity().getString(R.string.search_hint)
+//                );
+//                int id = searchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+//                TextView textView1 = (TextView) searchView.findViewById(id);
+//                textView1.setTextColor(getResources().getColor(R.color.background_Day));
 
                 storiesList=new ArrayList<>();
                 storiesList= LitePal.where("(mTitle like ?)","%"+s+"%").find(Stories.class);
