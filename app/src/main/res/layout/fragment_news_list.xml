@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/ll_mainlayout"
+<RelativeLayout
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -14,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"/>
 <com.youth.banner.Banner
+    android:layout_below="@id/toolbars"
     android:id="@+id/banner"
     android:layout_width="match_parent"
     android:layout_height="250dp">
@@ -23,8 +23,24 @@ android:id="@+id/main_recyclerView"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:scrollbars="vertical"
+    android:layout_below="@id/banner"
     >
 </android.support.v7.widget.RecyclerView>
 
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_marginRight="25dp"
+            android:src="@drawable/ic_calendar_white_24dp"
+            app:backgroundTint="@color/theme_Day"
+            android:layout_gravity="bottom|end"
+            android:fitsSystemWindows="false"
+            android:elevation="10dp"/>
+</FrameLayout>
 
-</LinearLayout>
+</RelativeLayout>

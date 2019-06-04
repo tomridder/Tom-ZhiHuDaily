@@ -1,12 +1,15 @@
 package com.bignerdranch.myrxmeizi.ui.fragment;
 
+import android.app.Activity;
 import android.bignerdranch.myrxmeizi.R;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -60,9 +63,8 @@ public class NewsListFragment extends Fragment {
 
     @Bind(R.id.toolbars)
     Toolbar toolbars;
-    @Bind(R.id.ll_mainlayout)
-    LinearLayout llMainlayout;
     Banner mBanner;
+    FloatingActionButton fabAdd;
     private StoriesAdapter storiesAdapter;
     private List<Stories> storiesList;
     private RecyclerView recyclerView;
@@ -72,6 +74,10 @@ public class NewsListFragment extends Fragment {
     private List<String> bannerTitles;
     private List<Stories> bannerStories;
     private Context context;
+
+    private static final int REQUEST_DATE=0;
+
+
 
     Date date=new Date();
 
@@ -92,6 +98,18 @@ public class NewsListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news_list, container, false);
+        fabAdd=(FloatingActionButton)view.findViewById(R.id.fab_add);
+        fabAdd.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                FragmentManager manager=getFragmentManager();
+                DatePickerFragment dialog=DatePickerFragment.newInstance(date);
+                dialog.setTargetFragment(NewsListFragment.this,REQUEST_DATE);
+                dialog.show(manager,"date");
+            }
+        });
         recyclerView = (RecyclerView) view.findViewById(R.id.main_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         storiesList = new ArrayList<>();
@@ -115,10 +133,31 @@ public class NewsListFragment extends Fragment {
             }
         });
 
-        ButterKnife.bind(this, view);
+        ButterKnife.bind(this,view);
         return view;
     }
 
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode!= Activity.RESULT_OK)
+        {
+            return;
+        }
+        if(requestCode==REQUEST_DATE)
+        {
+            date=(Date)data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+           // SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+           // text=sdf.format(date);
+//            AppCompatActivity activity = (AppCompatActivity) getActivity();
+//            ActionBar actionBar = activity.getSupportActionBar();
+//            if (actionBar != null) {
+//                actionBar.setTitle(text);
+//            }
+            getSomdayNews(date);
+
+        }
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -191,6 +230,60 @@ public class NewsListFragment extends Fragment {
         }else
         {
             date=new Date(date.getTime()-(long)24*60*60*1000);
+
+            Toast.makeText(getActivity(),"没有了",Toast.LENGTH_SHORT).show();
+        }
+        // Observable<Result> observable=api.getBeforeNew
+    }
+
+
+
+    private void getSomdayNews(final Date date1)
+    {
+        final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        date=date1;
+        final String time=sdf.format(date.getTime());
+
+        Retrofit retrofit = create();
+        if(date.before(new Date()))
+        {
+            ClientApi api = retrofit.create(ClientApi.class);
+            Observable<Result> resultObservable = api.getBeforeNews(time);
+            resultObservable.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<Result>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(Result result) {
+                            AppCompatActivity activity = (AppCompatActivity) getActivity();
+                            ActionBar actionBar = activity.getSupportActionBar();
+                            if (actionBar != null) {
+                                actionBar.setTitle(time);
+                            }
+                            storiesList.clear();
+                            storiesList.addAll(result.getStories());
+                            storiesAdapter.notifyDataSetChanged();
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    });
+            Log.i("MainActivityATS", time);
+        }else
+        {
+           // date=new Date(date.getTime()-(long)24*60*60*1000);
 
             Toast.makeText(getActivity(),"没有了",Toast.LENGTH_SHORT).show();
         }
