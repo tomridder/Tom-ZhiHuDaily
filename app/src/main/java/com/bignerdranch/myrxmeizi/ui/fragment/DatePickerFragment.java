@@ -41,8 +41,6 @@ public class DatePickerFragment extends DialogFragment
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState)
     {
         Log.i("TAG","我说一个粉刷匠");
-
-
         Log.i("TAG","我说一个粉刷匠");
         Date date=(Date)getArguments().getSerializable(ARG_DATE);
         Calendar calendar=Calendar.getInstance();

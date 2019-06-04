@@ -8,6 +8,7 @@
     <string name="main_menu_changetheme_day">夜间模式</string>
     <string name="main_menu_changetheme_night">日间模式</string>
 
+    <string name="search_hint">请输入搜索内容</string>
     <string name="date_today">今日热闻</string>
     <string name="test_list_date">3月20日 星期一</string>
     <string name="test_title">新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题，不忘初心，方得始终</string>
