@@ -39,6 +39,8 @@ public class DatePickerFragment extends DialogFragment
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState)
     {
+
+
         Date date=(Date)getArguments().getSerializable(ARG_DATE);
         Calendar calendar=Calendar.getInstance();
         calendar.setTime(date);
