@@ -20,6 +20,7 @@
         </activity>
         <activity android:name="com.bignerdranch.myrxmeizi.ui.activity.NewsDetailActivity"/>
         <activity android:name="com.bignerdranch.myrxmeizi.ui.activity.NewsFavoriteActivity"/>
+        <activity android:name="com.bignerdranch.myrxmeizi.ui.activity.CommentsActivity"/>
     </application>
 
 </manifest>

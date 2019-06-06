@@ -15,6 +15,12 @@
     <color name="secondary_text">#727272</color>
     <color name="divider">#B6B6B6</color>
 
+    <color name="comment">#606467</color>
+    <!-- 评论字体弱颜色,用与引号别人的话 -->
+    <color name="comment_weak">#9EA3A6</color>
+    <color name="comment_author">#60859F</color>
+    <color name="bottomnavigation_inactive">#D3D3D3</color>
+
     <!--日间模式-->
     <color name="theme_Day">#3F51B5</color>
     <color name="textColorFirst_Day">#DD000000</color>

@@ -7,7 +7,12 @@
         android:title=""
         android:icon="@drawable/fav_normal"
         app:showAsAction="always"/>
-
+<item
+    android:id="@+id/comments"
+    android:icon="@drawable/comment"
+    android:title=""
+    app:showAsAction="always"
+    />
     <item
     android:id="@+id/menu_action_share"
     android:title=""

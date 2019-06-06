@@ -23,7 +23,9 @@ import android.widget.TextView;
 
 import com.bignerdranch.myrxmeizi.bean.NewsDetail;
 import com.bignerdranch.myrxmeizi.bean.Stories;
+import com.bignerdranch.myrxmeizi.bean.StoryExtra;
 import com.bignerdranch.myrxmeizi.net.ClientApi;
+import com.bignerdranch.myrxmeizi.ui.activity.CommentsActivity;
 import com.bignerdranch.myrxmeizi.utils.HtmlUtil;
 import com.bumptech.glide.Glide;
 
@@ -67,6 +69,7 @@ public class NewsDetailFragment extends Fragment {
 
     private Stories stories;
     private boolean isFavourite=false;
+    private StoryExtra storyExtra;
 
     @Nullable
     @Override
@@ -93,6 +96,7 @@ public class NewsDetailFragment extends Fragment {
         }
         init();
         loadData();
+        storyExtra=getStoryExtra(stories.getId());
     }
 
     @Override
@@ -131,6 +135,12 @@ public class NewsDetailFragment extends Fragment {
                     item.setIcon(R.drawable.fav_normal);
                     isFavourite = false;
                 }
+                return true;
+            case R.id.comments:
+                Intent intent=new Intent(getActivity(), CommentsActivity.class);
+                intent.putExtra("id",stories.getId());
+                intent.putExtra("storyExtra",storyExtra);
+                startActivity(intent);
                 return true;
                     default:
                         return super.onOptionsItemSelected(item);
@@ -222,5 +232,36 @@ public class NewsDetailFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
+    }
+
+    private StoryExtra getStoryExtra(final long id)
+    {
+        Retrofit retrofit=create();
+        ClientApi api=retrofit.create(ClientApi.class);
+        Observable<StoryExtra> storyExtraObservable=api.getStoryExtra(stories.getId());
+        storyExtraObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<StoryExtra>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(StoryExtra storyExtra) {
+                             NewsDetailFragment.this.storyExtra=storyExtra;
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+        return storyExtra;
     }
 }

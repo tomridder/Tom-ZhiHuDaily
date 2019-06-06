@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp"
+    android:paddingTop="9dp"
+    android:paddingBottom="9dp">
+
+    <ImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="50dp"
+        android:src="@drawable/demo_avatar"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:id="@+id/tvAuthor"
+        android:layout_marginLeft="13dp"
+        android:layout_toRightOf="@id/ivAvatar"
+        tools:text="叔本华"
+        android:textColor="@color/comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_alignLeft="@id/tvAuthor"
+        android:layout_below="@id/tvAuthor"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/comment"
+        tools:text="上周六我去湖北随州漂流，两只船把我们的船撞翻，在激流出，我被盖在船底，我不敢松手，松手船就跑了，我还在水里，可是不松手我就被船一直压着，船跑得快水下石头多，这种情况该不该松手？？？"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:id="@+id/rlReply"
+        android:layout_alignLeft="@id/tvContent"
+        android:layout_marginTop="17dp"
+        android:layout_below="@id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvReplyContent"
+            android:layout_marginLeft="24dp"
+            android:textColor="@color/comment_weak"
+            tools:text="\@幸福的: 这不你活下来了么。那你到底松手没？"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tvReplyAuthor"
+            android:layout_alignLeft="@id/tvReplyContent"
+            android:layout_alignTop="@id/tvReplyContent"
+            android:textColor="@color/comment_author"
+            tools:text="\@幸福的: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:id="@+id/viewReply"
+            android:background="#DFE3E6"
+            android:layout_alignTop="@id/tvReplyContent"
+            android:layout_alignBottom="@id/tvReplyContent"
+            android:layout_width="7dp"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_below="@id/rlReply"
+        android:layout_alignLeft="@id/tvAuthor"
+        android:textColor="@color/comment_weak"
+        tools:text="1小时前 "
+        android:layout_marginTop="17dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvLikes"
+        android:layout_below="@+id/rlReply"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/tvTime"
+        tools:text="13"
+        android:layout_marginTop="17dp"
+        android:drawableLeft="@mipmap/like"
+        android:drawablePadding="7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
