@@ -7,7 +7,7 @@ Tom ZhiHuDaily使用的技术：
 - Gson & RxAndroid
 - Glide & Material Design
 - ButterKnife
-- Banner & LitaPal
+- Banner & LitePal
 
 
 Tom ZhiHuDaily可实现功能：
@@ -18,13 +18,14 @@ Tom ZhiHuDaily可实现功能：
 - 知乎Stories 的收藏
 
 
-![Image](https://github.com/tomridder/Tom-ZhiHuDaily/blob/master/5.png)
+![Image](https://github.com/tomridder/Tom-ZhiHuDaily/blob/master/6.png)
 
 #### 本文的主要内容
 
 - 知乎TopStories的轮播的实现（Rxjava & Retrofit & Banner）
 - DetailStories的实现(Glide & WebView)
 - 知乎Stories 收藏的实现(Litepal)
+- 知乎 长评论 短评论的实现(viewpager + tabLayout)
 
 
 先来一波Tom ZhiHuDaily的展示吧，这款 APP 还是非常精美和优雅的
@@ -302,7 +303,38 @@ LitePal是一款开源的Android数据库框架，采用对象关系映射（ORM
         recyclerView.setAdapter(adapter);
 
 ```
+## 四、知乎 长评论 短评论的实现
+#### 1、生成继承 RecyclerView.Adapter的 CommentsAdapter
+ 
+#### 2、生成继承 FragmentPagerAdapter的 CommentPagerAdapter
 
+#### 3、生成 CommentsFragment，并用 CommentsFragment 构建 长评论 短评论的Fragments
+```
+        CommentsFragment shortCommentsFragment = new CommentsFragment();
+        Bundle bundleForShortComments = new Bundle();
+        bundleForShortComments.putLong("id", id);
+        bundleForShortComments.putSerializable("storyExtra", storyExtra);
+        bundleForShortComments.putString("url", "http://news-at.zhihu.com/api/4/story/%1$s/short-comments");
+        bundleForShortComments.putInt("count", storyExtra.getShortComments());
+        shortCommentsFragment.setArguments(bundleForShortComments);
+
+        CommentsFragment longCommentsFragment = new CommentsFragment();
+        Bundle bundleForLongComments = new Bundle();
+        bundleForLongComments.putLong("id", id);
+        bundleForLongComments.putSerializable("storyExtra", storyExtra);
+        bundleForLongComments.putString("url", "http://news-at.zhihu.com/api/4/story/%1$s/long-comments");
+        bundleForShortComments.putInt("counts", storyExtra.getLongComments());
+        longCommentsFragment.setArguments(bundleForLongComments);
+```
+#### 4、生成 CommentsActivity，并 为viewPager 和tabLayout setAdapter
+```
+        fragments.add(shortCommentsFragment);
+        fragments.add(longCommentsFragment);
+        CommentPagerAdapter adapter = new CommentPagerAdapter(getSupportFragmentManager(), fragments, tabList);
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabsFromPagerAdapter(adapter);
+```
 以上便是我写这个 APP 的具体实现思路，以及踩过的一些坑，记录下来，给大家看看，最后附上这个 APP 的 Github 地址 [Tom ZhiHuDaily](https://github.com/tomridder/Tom-ZhiHuDaily)
 
 欢迎大家 star 和 fork，如果有什么想法或者建议，非常欢迎大家来讨论
