@@ -11,12 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NightTheme">
-        <activity android:name="com.bignerdranch.myrxmeizi.ui.activity.NewsListActivity">
+        <activity android:name="com.bignerdranch.myrxmeizi.ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="com.bignerdranch.myrxmeizi.ui.activity.NewsListActivity">
+
         </activity>
         <activity android:name="com.bignerdranch.myrxmeizi.ui.activity.NewsDetailActivity"/>
         <activity android:name="com.bignerdranch.myrxmeizi.ui.activity.NewsFavoriteActivity"/>

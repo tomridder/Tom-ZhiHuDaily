@@ -79,7 +79,7 @@ public class CommentsActivity extends AppCompatActivity
 
     private void initToolbar(Toolbar toolbar) {
         toolbar.setNavigationIcon(R.drawable.ic_navigate_before_white_18pt_2x);//设置导航栏图标
-        toolbar.setTitle("共" + storyExtra.getShortComments() + "条");//设置主标题
+        toolbar.setTitle("共" + (storyExtra.getShortComments()+storyExtra.getLongComments()) + "条");//设置主标题
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
