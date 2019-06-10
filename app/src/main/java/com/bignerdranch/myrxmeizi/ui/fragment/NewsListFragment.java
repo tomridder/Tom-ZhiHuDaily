@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.bignerdranch.myrxmeizi.R;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
@@ -23,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bignerdranch.myrxmeizi.adapter.StoriesAdapter;
@@ -227,11 +230,16 @@ public class NewsListFragment extends Fragment {
                         }
                     });
             Log.i("MainActivityATS", time);
+            Snackbar bar=Snackbar.make(getView(),"翻阅成功",Snackbar.LENGTH_LONG).setActionTextColor(Color.GREEN);
+            ((TextView)(bar.getView().findViewById(R.id.snackbar_text))).setTextColor(Color.CYAN);
+            bar.show();
         }else
         {
             date=new Date(date.getTime()-(long)24*60*60*1000);
 
-            Toast.makeText(getActivity(),"没有了",Toast.LENGTH_SHORT).show();
+            Snackbar bar=Snackbar.make(getView(),"没有了",Snackbar.LENGTH_LONG).setActionTextColor(Color.GREEN);
+            ((TextView)(bar.getView().findViewById(R.id.snackbar_text))).setTextColor(Color.CYAN);
+            bar.show();
         }
         // Observable<Result> observable=api.getBeforeNew
     }
@@ -281,11 +289,18 @@ public class NewsListFragment extends Fragment {
                         }
                     });
             Log.i("MainActivityATS", time);
+            Snackbar bar=Snackbar.make(getView(),"翻阅成功",Snackbar.LENGTH_LONG).setActionTextColor(Color.GREEN);
+            ((TextView)(bar.getView().findViewById(R.id.snackbar_text))).setTextColor(Color.CYAN);
+            bar.show();
         }else
         {
            // date=new Date(date.getTime()-(long)24*60*60*1000);
 
-            Toast.makeText(getActivity(),"没有了",Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getActivity(),"没有了",Toast.LENGTH_SHORT).show();
+          //  Snackbar.make(getView(),"没有了",Snackbar.LENGTH_SHORT).setActionTextColor(getResources().getColor(R.color.topbar_Background_Day)).show();
+        Snackbar bar=Snackbar.make(getView(),"没有了",Snackbar.LENGTH_LONG).setActionTextColor(Color.GREEN);
+        ((TextView)(bar.getView().findViewById(R.id.snackbar_text))).setTextColor(Color.CYAN);
+        bar.show();
         }
         // Observable<Result> observable=api.getBeforeNew
     }
@@ -331,6 +346,9 @@ public class NewsListFragment extends Fragment {
                     }
                 });
         Log.i("MainActivityATS", time);
+        Snackbar bar=Snackbar.make(getView(),"翻阅成功",Snackbar.LENGTH_LONG).setActionTextColor(Color.GREEN);
+        ((TextView)(bar.getView().findViewById(R.id.snackbar_text))).setTextColor(Color.CYAN);
+        bar.show();
         // Observable<Result> observable=api.getBeforeNews()
     }
 

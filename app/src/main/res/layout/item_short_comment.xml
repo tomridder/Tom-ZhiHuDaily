@@ -8,7 +8,8 @@
     android:paddingBottom="9dp"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android" >
-    <ImageView
+
+    <com.bignerdranch.myrxmeizi.utils.CircleImageView
         android:id="@+id/ivAvatar"
         android:layout_width="50dp"
         android:layout_height="50dp"
