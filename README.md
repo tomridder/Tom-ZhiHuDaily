@@ -1,5 +1,6 @@
+### 献给Leonardo  da Vinci
 ### 前言
-> 本文的内容主要是解析Tom ZhiHuDaily APP 的制作流程，以及代码的具体实现，若有什么不足之处，还请提出建议，附上这个 APP 的 Github 地址 [Tom ZhiHuDaily](https://github.com/tomridder/Tom-ZhiHuDaily) 欢迎大家 star 和 fork.
+>本文的内容主要是解析Tom ZhiHuDaily APP 的制作流程，以及代码的具体实现，若有什么不足之处，还请提出建议，附上这个 APP 的 Github 地址 [Tom ZhiHuDaily](https://github.com/tomridder/Tom-ZhiHuDaily) 欢迎大家 star 和 fork.
 
 Tom ZhiHuDaily使用的技术：
 
@@ -16,6 +17,7 @@ Tom ZhiHuDaily可实现功能：
 - 知乎TopStories的轮播
 - 知乎Stories 的上翻下翻
 - 知乎Stories 的收藏
+- 闪屏页属性动画
 
 
 ![Image](https://github.com/tomridder/Tom-ZhiHuDaily/blob/master/6.png)
@@ -26,16 +28,20 @@ Tom ZhiHuDaily可实现功能：
 - DetailStories的实现(Glide & WebView)
 - 知乎Stories 收藏的实现(Litepal)
 - 知乎 长评论 短评论的实现(viewpager + tabLayout)
-
+- 闪屏页属性动画的实现
 
 先来一波Tom ZhiHuDaily的展示吧，这款 APP 还是非常精美和优雅的
 - 上翻下翻 知乎Stories 和 WebView加载NewsDetail的效果
-
+ 
 ![1.gif](https://github.com/tomridder/Tom-ZhiHuDaily/blob/master/1zhihu.gif)
 
 - 知乎TopStories的轮播 和  知乎Stories 的收藏的效果
 
 ![2.gif](https://github.com/tomridder/Tom-ZhiHuDaily/blob/master/2zhihu.gif)
+
+- 闪屏页属性动画 ，短评论，根据具体日期选择Stories的效果
+
+![3.gif](https://github.com/tomridder/Tom-ZhiHuDaily/blob/master/3zhihu.gif)
 ## 一、知乎TopStories的轮播的实现
 
 #### 1、利用Retrofit+Rxjava 从JSon数据转成对象
@@ -338,6 +344,42 @@ LitePal是一款开源的Android数据库框架，采用对象关系映射（ORM
 以上便是我写这个 APP 的具体实现思路，以及踩过的一些坑，记录下来，给大家看看，最后附上这个 APP 的 Github 地址 [Tom ZhiHuDaily](https://github.com/tomridder/Tom-ZhiHuDaily)
 
 欢迎大家 star 和 fork，如果有什么想法或者建议，非常欢迎大家来讨论
+
+## 五、 闪屏页属性动画的实现
+```
+SimpleTarget target = new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(Bitmap bitmap, GlideAnimation glideAnimation) {
+                iv.setImageBitmap(bitmap);
+                iv.setPivotX(bitmap.getWidth() * 0.3f);
+                iv.setPivotY(bitmap.getHeight() * 0.25f);
+                ObjectAnimator objectAnimatorX = ObjectAnimator.ofFloat(iv, "scaleX", 1, 1.25f);
+                ObjectAnimator objectAnimatorY = ObjectAnimator.ofFloat(iv, "scaleY", 1, 1.25f);
+                AnimatorSet set = new AnimatorSet();
+                set.setDuration(2000).setStartDelay(1000);
+                set.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        startActivity(new Intent(SplashActivity.this, NewsListActivity.class));
+                        finish();
+                    }
+                });
+                set.playTogether(objectAnimatorX, objectAnimatorY);
+                set.start();
+            }
+        };
+        Glide.with(this).load(R.drawable.davinci2).asBitmap().into(target);
+```
+
+1.设置图片和缩放中心坐标
+
+2.设置放大到最大XY坐标
+
+3.设置动画持续时间和延迟时间
+
+4.设置在动画结束时跳转Activity
+
+5.设置同时执行XY坐标动画并开启属性动画
 
 -----
 
