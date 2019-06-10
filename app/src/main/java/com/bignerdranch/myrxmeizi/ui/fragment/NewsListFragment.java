@@ -146,6 +146,7 @@ public class NewsListFragment extends Fragment {
         if(resultCode!= Activity.RESULT_OK)
         {
             return;
+
         }
         if(requestCode==REQUEST_DATE)
         {
