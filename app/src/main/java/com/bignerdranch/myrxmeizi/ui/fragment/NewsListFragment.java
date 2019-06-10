@@ -147,6 +147,7 @@ public class NewsListFragment extends Fragment {
         {
             return;
 
+
         }
         if(requestCode==REQUEST_DATE)
         {
