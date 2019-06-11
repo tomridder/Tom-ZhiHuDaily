@@ -32,7 +32,7 @@ public class SplashActivity extends AppCompatActivity
         SimpleTarget target = new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap bitmap, GlideAnimation glideAnimation) {
-                
+
                 iv.setImageBitmap(bitmap);
                 iv.setPivotX(bitmap.getWidth() * 0.3f);
                 iv.setPivotY(bitmap.getHeight() * 0.25f);
