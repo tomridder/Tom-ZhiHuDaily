@@ -17,6 +17,7 @@ import com.bignerdranch.myrxmeizi.bean.Comment;
 import com.bignerdranch.myrxmeizi.bean.CommentJson;
 import com.bignerdranch.myrxmeizi.bean.StoryExtra;
 import com.bignerdranch.myrxmeizi.net.ClientApi;
+import com.bignerdranch.myrxmeizi.utils.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -56,7 +57,7 @@ public class CommentsFragment  extends Fragment
         count=bundle.getInt("count");
         rvComments.setLayoutManager(linearLayoutManager=new LinearLayoutManager(getActivity()));
         rvComments.setAdapter(commentsAdapter=new CommentsAdapter(getActivity()));
-
+        rvComments.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         getComments(url);
 
         return view;

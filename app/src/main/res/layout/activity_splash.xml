@@ -37,7 +37,7 @@
         android:layout_alignRight="@+id/words"
         android:textColor="@android:color/white"
         android:layout_below="@id/words"
-        android:text="--达*芬奇"
+        android:text="--达•芬奇"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     </RelativeLayout>
