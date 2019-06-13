@@ -43,4 +43,5 @@ dependencies {
     implementation 'com.jakewharton:butterknife:7.0.1'
     implementation 'com.youth.banner:banner:1.4.10'
     implementation 'org.litepal.android:java:3.0.0'
+    implementation 'org.greenrobot:eventbus:3.0.0'
 }

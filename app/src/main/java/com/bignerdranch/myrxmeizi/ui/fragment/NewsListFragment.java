@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bignerdranch.myrxmeizi.adapter.StoriesAdapter;
+import com.bignerdranch.myrxmeizi.bean.MessageEvent;
 import com.bignerdranch.myrxmeizi.bean.Result;
 import com.bignerdranch.myrxmeizi.bean.Stories;
 import com.bignerdranch.myrxmeizi.bean.TopStories;
@@ -40,6 +41,10 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerClickListener;
 import com.youth.banner.listener.OnBannerListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -95,6 +100,7 @@ public class NewsListFragment extends Fragment {
         setHasOptionsMenu(true);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         text=sdf.format(calendar.getTime());
+        EventBus.getDefault().register(this);
     }
 
     @Nullable
@@ -109,7 +115,7 @@ public class NewsListFragment extends Fragment {
             {
                 FragmentManager manager=getFragmentManager();
                 DatePickerFragment dialog=DatePickerFragment.newInstance(date);
-                dialog.setTargetFragment(NewsListFragment.this,REQUEST_DATE);
+               // dialog.setTargetFragment(NewsListFragment.this,REQUEST_DATE);
                 dialog.show(manager,"date");
             }
         });
@@ -141,26 +147,28 @@ public class NewsListFragment extends Fragment {
     }
 
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode!= Activity.RESULT_OK)
-        {
-            return;
-        }
-        if(requestCode==REQUEST_DATE)
-        {
-            date=(Date)data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-           // SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-           // text=sdf.format(date);
-//            AppCompatActivity activity = (AppCompatActivity) getActivity();
-//            ActionBar actionBar = activity.getSupportActionBar();
-//            if (actionBar != null) {
-//                actionBar.setTitle(text);
-//            }
-            getSomdayNews(date);
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if(resultCode!= Activity.RESULT_OK)
+//        {
+//            return;
+//        }
+//        if(requestCode==REQUEST_DATE)
+//        {
+//            date=(Date)data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+//           // SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+//           // text=sdf.format(date);
+////            AppCompatActivity activity = (AppCompatActivity) getActivity();
+////            ActionBar actionBar = activity.getSupportActionBar();
+////            if (actionBar != null) {
+////                actionBar.setTitle(text);
+////            }
+//            getSomdayNews(date);
+//
+//        }
+//    }
 
-        }
-    }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -357,6 +365,7 @@ public class NewsListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         init();
+
         Retrofit retrofit = create();
         ClientApi api = retrofit.create(ClientApi.class);
         Observable<Result> observable = api.getTodayNews();
@@ -423,9 +432,19 @@ public class NewsListFragment extends Fragment {
                 .build();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(MessageEvent messageEvent)
+    {
+        getSomdayNews(messageEvent.getMessage());
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if(EventBus.getDefault().isRegistered(this))
+        {
+            EventBus.getDefault().unregister(this);
+        }
         ButterKnife.unbind(this);
     }
     private Stories convertStory(TopStories topStories)

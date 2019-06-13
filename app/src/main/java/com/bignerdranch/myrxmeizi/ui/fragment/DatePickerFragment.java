@@ -15,6 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 
+import com.bignerdranch.myrxmeizi.bean.MessageEvent;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -61,20 +65,21 @@ public class DatePickerFragment extends DialogFragment
                         int month=datePicker.getMonth();
                         int day=datePicker.getDayOfMonth();
                         Date date=new GregorianCalendar(year,month,day).getTime();
-                        sendResult(Activity.RESULT_OK,date);
+                        EventBus.getDefault().post(new MessageEvent(date));
+                       // sendResult(Activity.RESULT_OK,date);
                     }
                 })
                 .create();
     }
 
-    private void sendResult(int resultCode,Date date)
-    {
-        if(getTargetFragment()==null)
-        {
-            return;
-        }
-        Intent intent=new Intent();
-        intent.putExtra(EXTRA_DATE,date);
-        getTargetFragment().onActivityResult(getTargetRequestCode(),resultCode,intent);
-    }
+//    private void sendResult(int resultCode,Date date)
+//    {
+//        if(getTargetFragment()==null)
+//        {
+//            return;
+//        }
+//        Intent intent=new Intent();
+//        intent.putExtra(EXTRA_DATE,date);
+//        getTargetFragment().onActivityResult(getTargetRequestCode(),resultCode,intent);
+//    }
 }
