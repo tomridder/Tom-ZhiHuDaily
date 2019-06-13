@@ -76,6 +76,7 @@ public class CommentsFragment  extends Fragment
                         @Override
                         public void onSubscribe(Disposable d) {
 
+
                         }
 
                         @Override
