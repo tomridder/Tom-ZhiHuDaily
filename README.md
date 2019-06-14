@@ -7,7 +7,7 @@ Tom ZhiHuDaily使用的技术：
 - Rxjava & Retrofit 
 - Gson & RxAndroid
 - Glide & Material Design
-- ButterKnife
+- ButterKnife & EventBus
 - Banner & LitePal
 
 
@@ -341,10 +341,6 @@ LitePal是一款开源的Android数据库框架，采用对象关系映射（ORM
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabsFromPagerAdapter(adapter);
 ```
-以上便是我写这个 APP 的具体实现思路，以及踩过的一些坑，记录下来，给大家看看，最后附上这个 APP 的 Github 地址 [Tom ZhiHuDaily](https://github.com/tomridder/Tom-ZhiHuDaily)
-
-欢迎大家 star 和 fork，如果有什么想法或者建议，非常欢迎大家来讨论
-
 ## 五、 闪屏页属性动画的实现
 ```
 SimpleTarget target = new SimpleTarget<Bitmap>() {
@@ -380,6 +376,10 @@ SimpleTarget target = new SimpleTarget<Bitmap>() {
 4.设置在动画结束时跳转Activity
 
 5.设置同时执行XY坐标动画并开启属性动画
+
+以上便是我写这个 APP 的具体实现思路，以及踩过的一些坑，记录下来，给大家看看，最后附上这个 APP 的 Github 地址 [Tom ZhiHuDaily](https://github.com/tomridder/Tom-ZhiHuDaily)
+
+欢迎大家 star 和 fork，如果有什么想法或者建议，非常欢迎大家来讨论
 
 -----
 
