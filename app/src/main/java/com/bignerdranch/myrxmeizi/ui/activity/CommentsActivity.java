@@ -63,7 +63,6 @@ public class CommentsActivity extends AppCompatActivity
         CommentsFragment longCommentsFragment = new CommentsFragment();
         Bundle bundleForLongComments = new Bundle();
         bundleForLongComments.putLong("id", id);
-
         bundleForLongComments.putSerializable("storyExtra", storyExtra);
         bundleForLongComments.putString("url", "http://news-at.zhihu.com/api/4/story/%1$s/long-comments");
         bundleForShortComments.putInt("counts", storyExtra.getLongComments());

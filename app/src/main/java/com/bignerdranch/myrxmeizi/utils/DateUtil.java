@@ -23,6 +23,6 @@ public class DateUtil
     }
 
     public static String format(long time) {
-        return dateFormat.format(time);
+        return android.text.format.DateFormat.format("MM-dd HH:mm:ss",time*1000).toString();
     }
 }
